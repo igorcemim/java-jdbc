@@ -2,14 +2,14 @@ package Exemplo;
 
 import Exemplo.Model.Contato;
 import Exemplo.Model.ContatoDAO;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class ExemploBancoDados {
     
     private static void testePesquisar() {
         ContatoDAO contatoDao = new ContatoDAO();
-        ArrayList<Contato> contatos = contatoDao.pesquisar();
+        List<Contato> contatos = contatoDao.pesquisar();
         for (Contato contato : contatos) {
             System.out.println(contato);
         }

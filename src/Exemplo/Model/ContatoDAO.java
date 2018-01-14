@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class ContatoDAO {
     
@@ -39,8 +40,8 @@ public class ContatoDAO {
         }
     }
     
-    public ArrayList<Contato> pesquisar() {
-        ArrayList<Contato> contatos = new ArrayList();
+    public List<Contato> pesquisar() {
+        List<Contato> contatos = new ArrayList<>();
         
         try {
             PreparedStatement statement = connection.prepareStatement("select * from contato");
