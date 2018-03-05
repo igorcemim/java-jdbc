@@ -12,17 +12,17 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ContatoDAO {
-    
+
     private Connection connection;
-    
+
     public ContatoDAO() {
         connection = new ConnectionFactory().getConnection();
     }
-    
+
     public void salvar(Contato contato) {
         try {
             String sql =
-                    "insert into contato" + 
+                    "insert into contato" +
                     "(nome, email, endereco, dataNascimento) " +
                     "values(?, ?, ?, ?)";
 
@@ -39,10 +39,10 @@ public class ContatoDAO {
             throw new RuntimeException(e);
         }
     }
-    
+
     public List<Contato> pesquisar() {
         List<Contato> contatos = new ArrayList<>();
-        
+
         try {
             PreparedStatement statement = connection.prepareStatement("select * from contato");
             ResultSet resultSet = statement.executeQuery();
@@ -50,14 +50,14 @@ public class ContatoDAO {
                 Contato contato = new Contato();
                 contato.setId(resultSet.getInt("id"));
                 contato.setNome(resultSet.getString("nome"));
-                contato.setEmail(resultSet.getString("nome"));
-                contato.setEndereco(resultSet.getString("nome"));
-                
+                contato.setEmail(resultSet.getString("email"));
+                contato.setEndereco(resultSet.getString("endereco"));
+
                 Date date = resultSet.getDate("dataNascimento");
                 Calendar dataNascimento = Calendar.getInstance();
                 dataNascimento.setTime(date);
                 contato.setDataNascimento(dataNascimento);
-                
+
                 contatos.add(contato);
             }
             resultSet.close();
@@ -65,8 +65,8 @@ public class ContatoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        
+
         return contatos;
     }
-    
+
 }
